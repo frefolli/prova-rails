@@ -1,0 +1,35 @@
+<h1>Accounts</h1>
+
+<div class="search_box">
+  <%= form_with :method => :get do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name %><br>
+    
+    <%= form.label :surname %>
+    <%= form.text_field :surname %><br>
+
+    <%= form.label :fiscalcode %>
+    <%= form.text_field :fiscalcode %><br>
+
+    <%= form.submit "filter" %>
+  <% end %>
+</div>
+
+<div class="accounts_div">
+  <table class="accounts_table">
+    <thead>
+      <th>fiscalcode</th>
+      <th>name</th>
+      <th>surname</th>
+      <th>actions</th>
+    </thead>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= account.fiscalcode %></td>
+        <td><%= account.name %></td>
+        <td><%= account.surname %></td>
+        <td><%= link_to "show", account_path(account) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
