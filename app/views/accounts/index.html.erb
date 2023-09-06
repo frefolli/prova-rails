@@ -1,17 +1,31 @@
 <h1>Accounts</h1>
 
+<div class="error_box">
+  <% if not @error.nil? %>
+    <p><% @error %></p>
+  <% end %>
+</div>
+
 <div class="search_box">
   <%= form_with :method => :get do |form| %>
-    <%= form.label :name %>
-    <%= form.text_field :name %><br>
+    <div class="form_pair">
+    <%= form.label :name, "Name" %>
+    <%= form.text_field :name, :value => params[:name] %>
+    </div>
     
-    <%= form.label :surname %>
-    <%= form.text_field :surname %><br>
+    <div class="form_pair">
+    <%= form.label :surname, "Surname" %>
+    <%= form.text_field :surname, :value => params[:surname] %>
+    </div>
 
-    <%= form.label :fiscalcode %>
-    <%= form.text_field :fiscalcode %><br>
+    <div class="form_pair">
+    <%= form.label :fiscalcode, "Fiscal Code" %>
+    <%= form.text_field :fiscalcode, :value => params[:fiscalcode] %>
+    </div>
 
+    <div class="form_pair">
     <%= form.submit "filter" %>
+    <%= form.submit "clean" %>
   <% end %>
 </div>
 
