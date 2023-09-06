@@ -5,4 +5,5 @@
   <li>CF:  <%= @account.fiscalcode %></li>
   <li>Credit: <%= @account.credit %></li>
   <li>ID: <%= @account.id %></li>
+  <%= button_to "delete", {:controller => :accounts, :action => 'destroy', :id => @account.id }, :method => :delete %>
 </ul>

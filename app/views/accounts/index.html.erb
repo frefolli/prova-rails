@@ -1,8 +1,7 @@
 <h1>Accounts</h1>
-
 <div class="error_box">
-  <% if not @error.nil? %>
-    <p><% @error %></p>
+  <% if flash[:error] %>
+    <p><%= flash[:error] %></p>
   <% end %>
 </div>
 
@@ -26,6 +25,29 @@
     <div class="form_pair">
     <%= form.submit "filter" %>
     <%= form.submit "clean" %>
+  <% end %>
+</div>
+
+<div class="create_box">
+  <%= form_with :method => :post do |form| %>
+    <div class="form_pair">
+    <%= form.label :name, "Name" %>
+    <%= form.text_field :name %>
+    </div>
+    
+    <div class="form_pair">
+    <%= form.label :surname, "Surname" %>
+    <%= form.text_field :surname %>
+    </div>
+
+    <div class="form_pair">
+    <%= form.label :fiscalcode, "Fiscal Code" %>
+    <%= form.text_field :fiscalcode %>
+    </div>
+
+    <div class="form_pair">
+    <%= form.submit "create" %>
+    <%= form.submit "clean", :type => "reset" %>
   <% end %>
 </div>
 

@@ -1,6 +1,5 @@
 class AccountsController < ApplicationController
   def index
-    @error = (params.has_key?(:error) ? params[:id] : nil)
     @accounts = Account.all
 
     if params.has_key?(:commit)
@@ -23,10 +22,47 @@ class AccountsController < ApplicationController
   end
 
   def show
-    @account = Account.find(params[:id])
+    @account = Account.find_by(id: params[:id])
     if @account.nil?
-      redirect_to :accounts, :error => "account doesn't exists"
+      flash[:error] = "No account with id = #{id}"
+      redirect_to :accounts
       return
     end
+  end
+
+  def destroy
+    @account = Account.find_by(id: params[:id])
+    if @account.nil?
+      flash[:error] = "No account with id = #{id}"
+      redirect_to :accounts
+      return
+    end
+
+    Account.delete(@account)
+    redirect_to :accounts
+  end
+
+  def create
+    if ((not params.has_key?(:name)) or
+        (not params.has_key?(:surname)) or
+        (not params.has_key?(:fiscalcode)))
+      flash[:error] = "Invalid parameters for creating Account"
+      redirect_to :accounts
+      return
+    end
+
+    account = Account.create(
+      :name => params[:name],
+      :surname => params[:name],
+      :fiscalcode => params[:fiscalcode],
+      :credit => 0)
+    
+    if not account.save
+      flash[:error] = "Invalid parameters for creating Account"
+      redirect_to :accounts
+      return
+    end
+
+    redirect_to account_path(account), :id => account.id
   end
 end
