@@ -14,11 +14,18 @@ end
 Account.delete_all
 
 assert_create(Account, [
-  {:name => "a", :surname => "A", fiscalcode: "0", :credit => 0},
-  {:name => "b", :surname => "B", fiscalcode: "1", :credit => 0},
-  {:name => "c", :surname => "C", fiscalcode: "2", :credit => 0},
-  {:name => "d", :surname => "D", fiscalcode: "3", :credit => 0},
-  {:name => "a", :surname => "E", fiscalcode: "4", :credit => 0},
-  {:name => "e", :surname => "A", fiscalcode: "5", :credit => 0},
-  {:name => "a", :surname => "A", fiscalcode: "6", :credit => 0}
+  {:name => "A", :surname => "Ason", fiscalcode: "0", :credit => 10},
+  {:name => "B", :surname => "Bson", fiscalcode: "1", :credit => 10},
+  {:name => "C", :surname => "Cson", fiscalcode: "2", :credit => 10}
+])
+
+assert_create(Transaction, [
+  {:fromId => Account.find_by(fiscalcode: "0"),
+   :toId => Account.find_by(fiscalcode: "1"),
+   :timestamp => "2010-10-20 10:10:10",
+   :amount => 1},
+  {:fromId => Account.find_by(fiscalcode: "0"),
+   :toId => Account.find_by(fiscalcode: "2"),
+   :timestamp => "2010-10-20 10:10:10",
+   :amount => 2}
 ])
