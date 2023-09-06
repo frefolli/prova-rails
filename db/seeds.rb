@@ -19,6 +19,6 @@ assert_create(Account, [
   {:name => "c", :surname => "C", :credit => 0},
   {:name => "d", :surname => "D", :credit => 0},
   {:name => "a", :surname => "E", :credit => 0},# same name    OK
-  {:name => "e", :surname => "A", :credit => 0} # same surname OK
+  {:name => "e", :surname => "A", :credit => 0},# same surname OK
   {:name => "a", :surname => "A", :credit => 0} # full replica ERR
 ])
