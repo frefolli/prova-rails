@@ -11,6 +11,7 @@ def assert_create(obj, params)
   assert_count(obj, params.length)
 end
 
+Transaction.delete_all
 Account.delete_all
 
 assert_create(Account, [
