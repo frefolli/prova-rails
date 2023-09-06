@@ -14,11 +14,11 @@ end
 Account.delete_all
 
 assert_create(Account, [
-  {:name => "a", :surname => "A", :credit => 0},
-  {:name => "b", :surname => "B", :credit => 0},
-  {:name => "c", :surname => "C", :credit => 0},
-  {:name => "d", :surname => "D", :credit => 0},
-  {:name => "a", :surname => "E", :credit => 0},# same name    OK
-  {:name => "e", :surname => "A", :credit => 0},# same surname OK
-  {:name => "a", :surname => "A", :credit => 0} # full replica ERR
+  {:name => "a", :surname => "A", fiscalcode: "0", :credit => 0},
+  {:name => "b", :surname => "B", fiscalcode: "1", :credit => 0},
+  {:name => "c", :surname => "C", fiscalcode: "2", :credit => 0},
+  {:name => "d", :surname => "D", fiscalcode: "3", :credit => 0},
+  {:name => "a", :surname => "E", fiscalcode: "4", :credit => 0},
+  {:name => "e", :surname => "A", fiscalcode: "5", :credit => 0},
+  {:name => "a", :surname => "A", fiscalcode: "6", :credit => 0}
 ])
