@@ -21,16 +21,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_144503) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "fromId_id", null: false
-    t.integer "toId_id", null: false
+    t.integer "from_id"
+    t.integer "to_id"
     t.integer "amount"
     t.datetime "timestamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["fromId_id"], name: "index_transactions_on_fromId_id"
-    t.index ["toId_id"], name: "index_transactions_on_toId_id"
+    t.index ["from_id"], name: "index_transactions_on_from_id"
+    t.index ["to_id"], name: "index_transactions_on_to_id"
   end
 
-  add_foreign_key "transactions", "accounts", column: "fromId_id"
-  add_foreign_key "transactions", "accounts", column: "toId_id"
+  add_foreign_key "transactions", "accounts", column: "from_id"
+  add_foreign_key "transactions", "accounts", column: "to_id"
 end

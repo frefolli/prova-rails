@@ -1,4 +1,6 @@
 <h1>Account Details</h1>
+
+<div class="details_div">
 <ul>
   <li>Name: <%= @account.name %></li>
   <li>Surname: <%= @account.surname %></li>
@@ -7,3 +9,38 @@
   <li>ID: <%= @account.id %></li>
   <%= button_to "delete", {:controller => :accounts, :action => 'destroy', :id => @account.id }, :method => :delete %>
 </ul>
+</div>
+
+<div class="transaction_box">
+  <%= form_with url: account_path(@account), :method => :post do |form| %>
+    <%= form.label :fiscalcode, "Recipient" %>
+    <%= form.text_field :amount, :value => "" %><br>
+
+    <%= form.label :amount, "Amount" %>
+    <%= form.number_field :amount, :value => 0 %><br>
+
+    <%= form.submit "send" %>
+    <%= form.submit "clean", :type => "reset" %>
+  <% end %>
+</div>
+
+<div class="transactions_div">
+  <table class="transactions_table">
+    <thead>
+      <th>donor</th>
+      <th>recipient</th>
+      <th>amount</th>
+      <th>timestamp</th>
+      <th>actions</th>
+    </thead>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction[:from] %></td>
+        <td><%= transaction[:to] %></td>
+        <td><%= transaction[:amount] %></td>
+        <td><%= transaction[:timestamp] %></td>
+        <td>revert</td>
+      </tr>
+    <% end %>
+  </table>
+</div>

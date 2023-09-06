@@ -23,10 +23,22 @@ class AccountsController < ApplicationController
 
   def show
     @account = Account.find_by(id: params[:id])
+    @transactions = []
     if @account.nil?
       flash[:error] = "No account with id = #{id}"
       redirect_to :accounts
       return
+    end
+
+    @account.transactions.each do |t|
+      from = (t.from ? t.from.fiscalcode : "")
+      to = (t.to ? t.to.fiscalcode : "")
+      @transactions.append({
+        from: from,
+        to: to,
+        amount: t.amount,
+        timestamp: t.timestamp
+      })
     end
   end
 
@@ -38,6 +50,7 @@ class AccountsController < ApplicationController
       return
     end
 
+    @account.destroy_transactions
     Account.delete(@account)
     redirect_to :accounts
   end

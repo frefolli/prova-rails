@@ -21,12 +21,16 @@ assert_create(Account, [
 ])
 
 assert_create(Transaction, [
-  {:fromId => Account.find_by(fiscalcode: "0"),
-   :toId => Account.find_by(fiscalcode: "1"),
+  {:from => Account.find_by(fiscalcode: "0"),
+   :to => Account.find_by(fiscalcode: "1"),
    :timestamp => "2010-10-20 10:10:10",
    :amount => 1},
-  {:fromId => Account.find_by(fiscalcode: "0"),
-   :toId => Account.find_by(fiscalcode: "2"),
+  {:from => Account.find_by(fiscalcode: "0"),
+   :to => Account.find_by(fiscalcode: "2"),
+   :timestamp => "2010-10-20 10:10:10",
+   :amount => 2},
+  {:from => nil,
+   :to => Account.find_by(fiscalcode: "2"),
    :timestamp => "2010-10-20 10:10:10",
    :amount => 2}
 ])
